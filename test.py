@@ -8,7 +8,7 @@ class horce:
         if self.speed > 85:
             self.stamina = random.randint(50, random.randint(55, 90))
         elif self.speed > 95:
-            self.stamina = random.randint(60, random.randint)
+            self.stamina = random.randint(30, random.randint(40, 70))
         self.luck = random.randint(70, 100)
         self.pos = 0
 
