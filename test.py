@@ -82,6 +82,9 @@ def buy_ticket():
         elif int(num) not in range(7):
             print("please 1～6")
             continue
+        elif int(num) == 0:
+            print("please 1～6")
+            continue
         elif int(num) in range(7):
             i = i + 1
             ranking_pre.append(int(num))
