@@ -69,7 +69,7 @@ def buy_ticket():
     print("please horcenum 1～6")
     ranking_pre = []
     i = 0
-    while i < 5:
+    while i <= 5:
         num = input(f"\n{i + 1}st?:")
         try:
             int(num)
@@ -79,14 +79,14 @@ def buy_ticket():
         if int(num) in ranking_pre:
             print("already exists")
             continue
-        elif int(num) not in range(6):
+        elif int(num) not in range(7):
             print("please 1～6")
             continue
-        elif int(num) in range(6):
+        elif int(num) in range(7):
             i = i + 1
             ranking_pre.append(int(num))
     print("check please\n")
-    for i in range(6):
+    for i in range(len(ranking_pre)):
         print(f"{i + 1}st:horcenum is {ranking_pre[int(i)]}\n")
     menu()
 
