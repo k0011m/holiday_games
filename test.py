@@ -3,8 +3,10 @@ import random
 
 yeslist = ["y", "Y", "yes", "Yes","Yes"]
 choicehorcelist = ["1", "2", "3", "4", "5", "6"]
-horcenamelist = ["ブレイブハート", "ウィナーズラン", "スピードスター", "ロングラン", "フューチャー", "エンジェル"]
+horcenamelist = ["ブレイブハート", "ウィナーズラン", "スピードスター", "ロングラン　　", "フューチャー　", "エンジェル　　"]
 ranking_pre = []
+horceticket = []
+
 
 class horce:
     def __init__(self, horce_num:int):
@@ -32,7 +34,7 @@ class horce:
             self.pos = self.pos + self.speed*0.8
 
 
-class ticket(horce):
+class ticket():
 
     def __init__(self, one, two, three, four, five, six):
         self.one = one
@@ -49,21 +51,20 @@ class ticket(horce):
 
 
 def check_status(horce1:horce, horce2:horce, horce3:horce, horce4:horce, horce5:horce, horce6:horce):
-    print(horce1.name, " horcenum:", horce1.num, " speed:", horce1.speed, " stamina:", horce1.stamina, " luck:", horce1.luck, " technic", horce1.tech, "\n")
-    print(horce2.name, " horcenum:", horce2.num, " speed:", horce2.speed, " stamina:", horce2.stamina, " luck:", horce2.luck, " technic", horce2.tech, "\n")
-    print(horce3.name, " horcenum:", horce3.num, " speed:", horce3.speed, " stamina:", horce3.stamina, " luck:", horce3.luck, " technic", horce3.tech, "\n")
-    print(horce4.name, " horcenum:", horce4.num, " speed:", horce4.speed, " stamina:", horce4.stamina, " luck:", horce4.luck, " technic", horce4.tech, "\n")
-    print(horce5.name, " horcenum:", horce5.num, " speed:", horce5.speed, " stamina:", horce5.stamina, " luck:", horce5.luck, " technic", horce5.tech, "\n")
-    print(horce6.name, " horcenum:", horce6.num, " speed:", horce6.speed, " stamina:", horce6.stamina, " luck:", horce6.luck, " technic", horce6.tech, "\n")
+    print(horce1.name, " horcenum:", horce1.num, " speed:", horce1.speed, " stamina:", horce1.stamina, " luck:", horce1.luck, " technic", horce1.tech)
+    print(horce2.name, " horcenum:", horce2.num, " speed:", horce2.speed, " stamina:", horce2.stamina, " luck:", horce2.luck, " technic", horce2.tech)
+    print(horce3.name, " horcenum:", horce3.num, " speed:", horce3.speed, " stamina:", horce3.stamina, " luck:", horce3.luck, " technic", horce3.tech)
+    print(horce4.name, " horcenum:", horce4.num, " speed:", horce4.speed, " stamina:", horce4.stamina, " luck:", horce4.luck, " technic", horce4.tech)
+    print(horce5.name, " horcenum:", horce5.num, " speed:", horce5.speed, " stamina:", horce5.stamina, " luck:", horce5.luck, " technic", horce5.tech)
+    print(horce6.name, " horcenum:", horce6.num, " speed:", horce6.speed, " stamina:", horce6.stamina, " luck:", horce6.luck, " technic", horce6.tech)
     input("Press Enter Key")
     menu()
 
-horceticket = None
 
 def buy_ticket():
     global horceticket
     global ranking_pre
-    if (horceticket != None):
+    if (horceticket != []):
         if (input("Buy a new ticket? Y/N:") not in yeslist):
             menu()
     print("please horcenum 1～6")
@@ -90,24 +91,28 @@ def buy_ticket():
             ranking_pre.append(int(num))
     print("check please\n")
     for i in range(len(ranking_pre)):
-        print(f"{i + 1}st:horcenum is {ranking_pre[int(i)]}\n")
+        print(f"{i + 1}st:horcenum is {ranking_pre[int(i)]}")
+    if input("Buy? Y/N:") not in yeslist:
+        buy_ticket()
+    horceticket = ranking_pre
     menu()
+
 
 def menu():
     # set horce
-    horce1 = horce(1)
-    horce2 = horce(2)
-    horce3 = horce(3)
-    horce4 = horce(4)
-    horce5 = horce(5)
-    horce6 = horce(6)
+    global horce1
+    global horce2
+    global horce3
+    global horce4
+    global horce5
+    global horce6
 
     print("Menu!\n")
-    print("################\n")
-    print("1.Start to race!\n")
-    print("2.Buy a ticket\n")
-    print("3.Check status\n")
-    print("################\n\n\n")
+    print("################")
+    print("1.Start to race!")
+    print("2.Buy a ticket")
+    print("3.Check status")
+    print("################\n\n")
     selectnum = input("Please number:")
 
     if selectnum == "1":
@@ -120,6 +125,19 @@ def menu():
         return
 
 def main():
+    global horce1
+    global horce2
+    global horce3
+    global horce4
+    global horce5
+    global horce6
+
+    horce1 = horce(1)
+    horce2 = horce(2)
+    horce3 = horce(3)
+    horce4 = horce(4)
+    horce5 = horce(5)
+    horce6 = horce(6)
     print("Welcome to rk01m's horce racing!\n\n\n")
     startmenu = input("Go to menu y/n:")
     if startmenu in yeslist:
