@@ -12,15 +12,21 @@ class horce:
     def __init__(self, horce_num:int):
         self.num = horce_num
         self.name = horcenamelist[horce_num - 1]
-        self.speed = random.randint(70, 100)
-        if self.speed > 85:
+        self.speed = random.randint(60, 100)
+        
+        if self.speed > 80:
             self.stamina = random.randint(50, random.randint(70, 90))
-            if self.speed > 95:
+            if self.speed > 90:
                 self.stamina = random.randint(45, random.randint(50, 80))
         else:
             self.stamina = random.randint(60, random.randint(70, 100))
-        self.luck = random.randint(60, 100)
+        
         self.tech = random.randint(60, 100)
+
+        self.weather = random.randint(0, 2)
+
+        self.luck = random.randint(60, 100)
+        
         self.weather = random.randint(0, 2)
         self.pos = 0
 
