@@ -34,19 +34,22 @@ class horce:
             self.pos = self.pos + self.speed*0.8
 
 
-class ticket():
-
-    def __init__(self, one, two, three, four, five, six):
-        self.one = one
-        self.two = two
-        self.three = three
-        self.four = four
-        self.five = five
-        self.six = six
-
-    def run_all(self, moveway:int, horce1:horce, horce2:horce, horce3:horce, horce4:horce, horce5:horce, horce6:horce):
+def run_all():
+    for i in range(100):
         horce1.run_one()
-        
+        horce2.run_one()
+        horce3.run_one()
+        horce4.run_one()
+        horce5.run_one()
+        horce6.run_one()
+    ranking_list = [(horce1.pos, f"{horce1.num}:{horce1.name}"), (horce2.pos, f"{horce2.num}:{horce2.name}"), 
+                    (horce3.pos, f"{horce3.num}:{horce3.name}"), (horce4.pos, f"{horce4.num}:{horce4.name}"), 
+                    (horce5.pos, f"{horce5.num}:{horce5.name}"), (horce6.pos, f"{horce6.num}:{horce6.name}")]
+    ranking_list = sorted(ranking_list, reverse=True, key=lambda item : item[0])
+    for i in range(len(ranking_list)):
+        print(str(ranking_list[i][1]))
+    menu()
+
 
 
 
@@ -67,7 +70,7 @@ def buy_ticket():
     if (horceticket != []):
         if (input("Buy a new ticket? Y/N:") not in yeslist):
             menu()
-    print("please horcenum 1～6")
+    print("please horcenum 1~6")
     ranking_pre = []
     i = 0
     while i <= 5:
@@ -75,16 +78,16 @@ def buy_ticket():
         try:
             int(num)
         except Exception:
-            print("please 1～6")
+            print("please 1~6")
             continue
         if int(num) in ranking_pre:
             print("already exists")
             continue
         elif int(num) not in range(7):
-            print("please 1～6")
+            print("please 1~6")
             continue
         elif int(num) == 0:
-            print("please 1～6")
+            print("please 1~6")
             continue
         elif int(num) in range(7):
             i = i + 1
@@ -92,7 +95,7 @@ def buy_ticket():
     print("check please\n")
     for i in range(len(ranking_pre)):
         print(f"{i + 1}st:horcenum is {ranking_pre[int(i)]}")
-    if input("Buy? Y/N:") not in yeslist:
+    if input("Do you buy This ticket? Y/N:") not in yeslist:
         buy_ticket()
     horceticket = ranking_pre
     menu()
@@ -100,12 +103,6 @@ def buy_ticket():
 
 def menu():
     # set horce
-    global horce1
-    global horce2
-    global horce3
-    global horce4
-    global horce5
-    global horce6
 
     print("Menu!\n")
     print("################")
@@ -116,13 +113,25 @@ def menu():
     selectnum = input("Please number:")
 
     if selectnum == "1":
-        return
+        if horceticket == []:
+            print("please buy ticket")
+            menu()
+        else:
+            print("Is this OK?")
+            for i in range(len(horceticket)):
+                print(f"{i}st", horceticket[i])
+            if input("Y/N:") in yeslist:
+                run_all()
+            else:
+                input("Let's buy!")
+                menu()
+
     elif selectnum == "2":
         buy_ticket()
     elif selectnum == "3":
         check_status(horce1, horce2, horce3, horce4, horce5, horce6)
     else:
-        return
+        print("please 1~3")
 
 def main():
     global horce1
@@ -139,7 +148,7 @@ def main():
     horce5 = horce(5)
     horce6 = horce(6)
     print("Welcome to rk01m's horce racing!\n\n\n")
-    startmenu = input("Go to menu y/n:")
+    startmenu = input("Go to menu Y/N:")
     if startmenu in yeslist:
         menu()
     else:
