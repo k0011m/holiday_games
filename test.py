@@ -18,14 +18,14 @@ class horse:
         self.name = horse_name
         self.num = num
         self.speed = random.randint(60, 100)
-        
+
         if self.speed > 80:
             self.stamina = random.randint(50, random.randint(70, 90))
             if self.speed > 90:
                 self.stamina = random.randint(45, random.randint(50, 80))
         else:
             self.stamina = random.randint(60, random.randint(70, 100))
-        
+
         self.tech = random.randint(60, 100)
 
         self.weather = random.randint(0, 2)
@@ -50,7 +50,7 @@ class stadium:
             self.weather = "cloudy"
         else:
             self.weather = "sunny"
-        
+
         self.cource = random.randint(12500, 17000)
         self.line = random.randint(75000, 10000)
         self.curve = random.randint(self.cource - self.curve, self.cource)
@@ -62,10 +62,15 @@ def run_all():
             horselist[i].run_one()
     ranking_list = []
     for i in range(6):
-        ranking_list.append(horselist[i+1].pos, f"{horselist[i+1].num}:{horselist.name}")
+        ranking_list.append((horselist[i].pos, horselist[i].num, horselist[i].name))
     ranking_list = sorted(ranking_list, reverse=True, key=lambda item : item[0])
+    rankingnum_list = []
     for i in range(len(ranking_list)):
-        print(str(ranking_list[i][1]))
+        print(f"{i+1}st:",f"{str(ranking_list[i][1]}:{ranking_list[i][2]}"))
+        rankingnum_list.append(int(ranking_list[i][1]))
+    if rankingnum_list == horceticket:
+        print("YOU ARE SUPERSTAR!!!!!!!!!\nreturn coin x150!")
+        
     menu()
 
 
@@ -116,7 +121,6 @@ def buy_ticket():
 
 
 def menu():
-    # set horse
 
     print("Menu!\n")
     print("################")
@@ -153,13 +157,16 @@ def menu():
 def main():
     global horselist
     horselist = []
+    global coin
+    coin = 30000
 
+    #set horse
     horsenamelist_copy = horsenamelist
     for i in range(6):
         horse_num = random.randint(0, len(horsenamelist_copy) - 1)
         horselist.append(horse(horsenamelist_copy[horse_num], i+1))
         horsenamelist_copy.pop(horse_num)
-    
+
     print("Welcome to rk01m's horse racing!\n\n")
     startmenu = input("Go to menu Y/N:")
     if startmenu in yeslist:
