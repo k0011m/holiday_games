@@ -57,6 +57,9 @@ class stadium:
 
 
 def run_all():
+    global coin
+    global bet_coin
+
     for i in range(100):
         for i in range(6):
             horselist[i].run_one()
@@ -66,11 +69,19 @@ def run_all():
     ranking_list = sorted(ranking_list, reverse=True, key=lambda item : item[0])
     rankingnum_list = []
     for i in range(len(ranking_list)):
-        print(f"{i+1}st:",f"{str(ranking_list[i][1]}:{ranking_list[i][2]}"))
+        print(f"{i+1}st:",f"{str(ranking_list[i][1])}:{ranking_list[i][2]}")
         rankingnum_list.append(int(ranking_list[i][1]))
-    if rankingnum_list == horceticket:
+    if rankingnum_list == horseticket:
         print("YOU ARE SUPERSTAR!!!!!!!!!\nreturn coin x150!")
-        
+        coin = coin + bet_coin * 149
+    returncoin = [50, 20, 8, 3, 1.5]
+    for i in range(5):
+        if rankinglist_num[i] == horseticket[i]:
+            if rankinglist_num[i+1] != horseticket[i+1]:
+                print(f"YOU ARE NICE!!!\nreturn coin x{returncoin[1]}")
+                coin = coin + bet_coin * returncoin[i]
+
+
     menu()
 
 
@@ -86,9 +97,23 @@ def check_status():
 def buy_ticket():
     global horseticket
     global ranking_pre
+    global bet_coin
     if (horseticket != []):
         if (input("Buy a new ticket? Y/N:") not in yeslist):
             menu()
+    bet_coin = input("How many coins to bet")
+    try:
+        int(bet_coin)
+    except Exception:
+        print("please int")
+        menu()
+    if int(bet_coin) > coin:
+        print("huge")
+        menu()
+    elif input(f"{bet_coin}:bet OK? Y/N\n") not in yeslist:
+        print("OK")
+        menu()
+
     print("please horsenum 1~6")
     ranking_pre = []
     i = 0
