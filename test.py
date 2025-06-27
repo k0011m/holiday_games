@@ -2,16 +2,21 @@ import os
 import random
 
 yeslist = ["y", "Y", "yes", "Yes","Yes"]
-choicehorcelist = ["1", "2", "3", "4", "5", "6"]
-horcenamelist = ["ブレイブハート", "ウィナーズラン", "スピードスター", "ロングラン　　", "フューチャー　", "エンジェル　　"]
+choicehorselist = ["1", "2", "3", "4", "5", "6"]
+horsenamelist = horse_names = ["ブレイブハート", "ウィナーズラン", "スピードスター", "ロングラン　　", "フューチャー　", "エンジェル　　",
+                               "ゴールデンサン", "ドリームクロス", "ミラクルギフト", "スターライト　", "シルバーホース", "ビクトリーワン",
+                               "アースクエイク", "レジェンダー　", "シャイニング　", "プラチナムーン", "スカイハイ　　", "ワンダーホース",
+                               "ハヤブサ　　　", "ファントム　　", "ジェネシス　　", "コズミック　　", "サンライズ　　", "ナイトメア　　",
+                               "オリオン　　　", "フェニックス　", "ペガサス　　　", "ユニコーン　　", "ドラゴン　　　"]
 ranking_pre = []
-horceticket = []
+horseticket = []
+horselist = []
 
 
-class horce:
-    def __init__(self, horce_num:int):
-        self.num = horce_num
-        self.name = horcenamelist[horce_num - 1]
+class horse:
+    def __init__(self, horse_name:str, num):
+        self.name = horse_name
+        self.num = num
         self.speed = random.randint(60, 100)
         
         if self.speed > 80:
@@ -26,31 +31,38 @@ class horce:
         self.weather = random.randint(0, 2)
 
         self.luck = random.randint(60, 100)
-        
-        self.weather = random.randint(0, 2)
+
         self.pos = 0
 
     def run_one(self):
         randseed = random.randint(0, 100)#100 change task
         if self.stamina < randseed:
-            self.pos = self.pos + self.speed*1.4
+            self.pos = self.pos + self.speed*1.3
         elif self.stamina/2 < randseed:
             self.pos = self.pos + self.speed
         else:
             self.pos = self.pos + self.speed*0.8
 
+class stadium:
+
+    def __init__(self):
+        if random.randint(0, 2) == 2:
+            self.weather = "cloudy"
+        else:
+            self.weather = "sunny"
+        
+        self.cource = random.randint(12500, 17000)
+        self.line = random.randint(75000, 10000)
+        self.curve = random.randint(self.cource - self.curve, self.cource)
+
 
 def run_all():
     for i in range(100):
-        horce1.run_one()
-        horce2.run_one()
-        horce3.run_one()
-        horce4.run_one()
-        horce5.run_one()
-        horce6.run_one()
-    ranking_list = [(horce1.pos, f"{horce1.num}:{horce1.name}"), (horce2.pos, f"{horce2.num}:{horce2.name}"), 
-                    (horce3.pos, f"{horce3.num}:{horce3.name}"), (horce4.pos, f"{horce4.num}:{horce4.name}"), 
-                    (horce5.pos, f"{horce5.num}:{horce5.name}"), (horce6.pos, f"{horce6.num}:{horce6.name}")]
+        for i in range(6):
+            horselist[i].run_one()
+    ranking_list = []
+    for i in range(6):
+        ranking_list.append(horselist[i+1].pos, f"{horselist[i+1].num}:{horselist.name}")
     ranking_list = sorted(ranking_list, reverse=True, key=lambda item : item[0])
     for i in range(len(ranking_list)):
         print(str(ranking_list[i][1]))
@@ -59,24 +71,20 @@ def run_all():
 
 
 
-def check_status(horce1:horce, horce2:horce, horce3:horce, horce4:horce, horce5:horce, horce6:horce):
-    print(horce1.name, " horcenum:", horce1.num, " speed:", horce1.speed, " stamina:", horce1.stamina, " luck:", horce1.luck, " technic", horce1.tech)
-    print(horce2.name, " horcenum:", horce2.num, " speed:", horce2.speed, " stamina:", horce2.stamina, " luck:", horce2.luck, " technic", horce2.tech)
-    print(horce3.name, " horcenum:", horce3.num, " speed:", horce3.speed, " stamina:", horce3.stamina, " luck:", horce3.luck, " technic", horce3.tech)
-    print(horce4.name, " horcenum:", horce4.num, " speed:", horce4.speed, " stamina:", horce4.stamina, " luck:", horce4.luck, " technic", horce4.tech)
-    print(horce5.name, " horcenum:", horce5.num, " speed:", horce5.speed, " stamina:", horce5.stamina, " luck:", horce5.luck, " technic", horce5.tech)
-    print(horce6.name, " horcenum:", horce6.num, " speed:", horce6.speed, " stamina:", horce6.stamina, " luck:", horce6.luck, " technic", horce6.tech)
+def check_status():
+    for i in range(6):
+        print(horselist[i].name, " horsenum:", horselist[i].num, " speed:", horselist[i].speed, " stamina:", horselist[i].stamina, " luck:", horselist[i].luck, " technic", horselist[i].tech)
     input("Press Enter Key")
     menu()
 
 
 def buy_ticket():
-    global horceticket
+    global horseticket
     global ranking_pre
-    if (horceticket != []):
+    if (horseticket != []):
         if (input("Buy a new ticket? Y/N:") not in yeslist):
             menu()
-    print("please horcenum 1~6")
+    print("please horsenum 1~6")
     ranking_pre = []
     i = 0
     while i <= 5:
@@ -100,32 +108,33 @@ def buy_ticket():
             ranking_pre.append(int(num))
     print("check please\n")
     for i in range(len(ranking_pre)):
-        print(f"{i + 1}st:horcenum is {ranking_pre[int(i)]}")
+        print(f"{i + 1}st:horsenum is {ranking_pre[int(i)]}")
     if input("Do you buy This ticket? Y/N:") not in yeslist:
         buy_ticket()
-    horceticket = ranking_pre
+    horseticket = ranking_pre
     menu()
 
 
 def menu():
-    # set horce
+    # set horse
 
     print("Menu!\n")
     print("################")
     print("1.Start to race!")
     print("2.Buy a ticket")
     print("3.Check status")
+    print("4.Exit or change horse")
     print("################\n\n")
     selectnum = input("Please number:")
 
     if selectnum == "1":
-        if horceticket == []:
+        if horseticket == []:
             print("please buy ticket")
             menu()
         else:
             print("Is this OK?")
-            for i in range(len(horceticket)):
-                print(f"{i}st", horceticket[i])
+            for i in range(len(horseticket)):
+                print(f"{i}st", horseticket[i])
             if input("Y/N:") in yeslist:
                 run_all()
             else:
@@ -135,25 +144,23 @@ def menu():
     elif selectnum == "2":
         buy_ticket()
     elif selectnum == "3":
-        check_status(horce1, horce2, horce3, horce4, horce5, horce6)
+        check_status()
+    elif selectnum == "4":
+        main()
     else:
         print("please 1~3")
 
 def main():
-    global horce1
-    global horce2
-    global horce3
-    global horce4
-    global horce5
-    global horce6
+    global horselist
+    horselist = []
 
-    horce1 = horce(1)
-    horce2 = horce(2)
-    horce3 = horce(3)
-    horce4 = horce(4)
-    horce5 = horce(5)
-    horce6 = horce(6)
-    print("Welcome to rk01m's horce racing!\n\n\n")
+    horsenamelist_copy = horsenamelist
+    for i in range(6):
+        horse_num = random.randint(0, len(horsenamelist_copy) - 1)
+        horselist.append(horse(horsenamelist_copy[horse_num], i+1))
+        horsenamelist_copy.pop(horse_num)
+    
+    print("Welcome to rk01m's horse racing!\n\n")
     startmenu = input("Go to menu Y/N:")
     if startmenu in yeslist:
         menu()
