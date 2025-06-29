@@ -63,6 +63,8 @@ def run_all():
     global coin
     global bet_coin
 
+    for i in range(6):
+        horselist[i].pos = 0
     for i in range(100):
         for i in range(6):
             horselist[i].run_one()
@@ -81,17 +83,27 @@ def run_all():
     returncoin = [50, 20, 8, 3, 1.5]
     for i in range(5):
         if rankingnum_list[i] == horseticket[i]:
-            if rankingnum_list[i+1] != horseticket[i+1]:
-                print(f"YOU ARE NICE!!!\nreturn coin x{returncoin[i]}")
-                coin = coin + int(bet_coin) * returncoin[i]
-                menu()
-    
+            print(f"YOU ARE NICE!!!\nreturn coin x{returncoin[i]}")
+            coin = round(coin + int(bet_coin) * returncoin[i])
+            menu()
+
     for i in range(5):
-        if rankingnum_list[i+1] == horseticket[i+2] or ranking_list[i+1] == horseticket[i]:
-            print(f"YOU ARE GOOD\nreturn coin x0.3")
+        if i == 0:
+            if rankingnum_list[i] == horseticket[i+1]:
+                print(f"YOU ARE GOOD\nreturn coin x0.3")
+                coin = round(coin - int(bet_coin) * 0.7)
+                
+        elif i == 5:
+            if rankingnum_list[i] == horseticket[i-1]:
+                print(f"YOU ARE GOOD\nreturn coin x0.3")
+                coin = round(coin - int(bet_coin) * 0.7)
+        else:
+            if rankingnum_list[i] == horseticket[i+1] or ranking_list[i] == horseticket[i-1]:
+                print(f"YOU ARE GOOD\nreturn coin x0.3")
+                coin = round(coin - int(bet_coin) * 0.7)
 
 
-    coin = coin + int(bet_coin) * 0.05
+    coin = round(coin - int(bet_coin) * 0.95)
 
     menu()
 
@@ -175,7 +187,7 @@ def menu():
         else:
             print("Is this OK?")
             for i in range(len(horseticket)):
-                print(f"{i}st", horseticket[i])
+                print(f"{i+1}st", horseticket[i])
             if input("Y/N:") in yeslist:
                 run_all()
             else:
