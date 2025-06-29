@@ -92,18 +92,40 @@ def run_all():
             if rankingnum_list[i] == horseticket[i+1]:
                 print(f"YOU ARE GOOD\nreturn coin x0.3")
                 coin = round(coin - int(bet_coin) * 0.7)
+                menu()
                 
         elif i == 5:
             if rankingnum_list[i] == horseticket[i-1]:
                 print(f"YOU ARE GOOD\nreturn coin x0.3")
                 coin = round(coin - int(bet_coin) * 0.7)
+                menu()
         else:
             if rankingnum_list[i] == horseticket[i+1] or ranking_list[i] == horseticket[i-1]:
                 print(f"YOU ARE GOOD\nreturn coin x0.3")
                 coin = round(coin - int(bet_coin) * 0.7)
+                menu()
+
+    for i in range(5):
+        if i == 0 or i == 1:
+            if rankingnum_list[i] == horseticket[i+2]:
+                print(f"YOU ARE GOOD\nreturn coin x0.1")
+                coin = round(coin - int(bet_coin) * 0.9)
+                menu()
+                
+        elif i == 5 or i == 4:
+            if rankingnum_list[i] == horseticket[i-2]:
+                print(f"YOU ARE GOOD\nreturn coin x0.1")
+                coin = round(coin - int(bet_coin) * 0.9)
+                menu()
+        else:
+            if rankingnum_list[i] == horseticket[i+2] or ranking_list[i] == horseticket[i-2]:
+                print(f"YOU ARE GOOD\nreturn coin x0.1")
+                coin = round(coin - int(bet_coin) * 0.9)
+                menu()
 
 
-    coin = round(coin - int(bet_coin) * 0.95)
+    print("YOU ARE GOOD\nreturn coin x0.01")
+    coin = round(coin - int(bet_coin) * 0.99)
 
     menu()
 
