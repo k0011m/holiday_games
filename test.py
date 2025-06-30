@@ -63,15 +63,15 @@ def run_all():
     global coin
     global bet_coin
 
-    for i in range(6):
+    for i in range(12):
         horselist[i].pos = 0
 
     for i in range(100):
-        for i in range(6):
+        for i in range(12):
             horselist[i].run_one()
     ranking_list = []
 
-    for i in range(6):
+    for i in range(12):
         ranking_list.append((horselist[i].pos, horselist[i].num, horselist[i].name))
     ranking_list = sorted(ranking_list, reverse=True, key=lambda item : item[0])
     rankingnum_list = []
@@ -79,6 +79,12 @@ def run_all():
     for i in range(len(ranking_list)):
         print(f"{i+1}st:",f"{str(ranking_list[i][1])}:{ranking_list[i][2]}")
         rankingnum_list.append(int(ranking_list[i][1]))
+
+    rankingnum_list_pre = rankingnum_list
+    rankingnum_list = []
+
+    for i in range(6):
+        rankingnum_list.append(rankingnum_list_pre[i])
 
     if rankingnum_list == horseticket:
         print("YOU ARE SUPERSTAR!!!!!!!!!\nreturn coin x150!")
@@ -88,7 +94,7 @@ def run_all():
 
     returncoin = [50, 20, 8, 3, 1.5]
     count = 0
-    for i in range(5):
+    for i in range(3):
         if rankingnum_list[i] == horseticket[i]:
             count = count+1
 
@@ -109,7 +115,7 @@ def run_all():
             
     
     print(f"YOU ARE NICE!!!\nreturn coin x{returncoin[5-count]}")
-    coin = round(coin + int(bet_coin) * (returncoin[5-count]-1))
+    coin = round(coin + int(bet_coin) * (int(returncoin[5-count])-1))
     input("Press Enter Key")
     menu()
 
@@ -117,7 +123,7 @@ def run_all():
 
 
 def check_status():
-    for i in range(6):
+    for i in range(12):
         print(horselist[i].name, " horsenum:", horselist[i].num, " speed:", horselist[i].speed, " stamina:", horselist[i].stamina, " luck:", horselist[i].luck, " technic", horselist[i].tech)
     input("Press Enter Key")
     menu()
@@ -128,7 +134,7 @@ def buy_ticket():
     global ranking_pre
     global bet_coin
     if (horseticket != []):
-        if (input("Buy a new ticket? Y/N:") not in yeslist):
+        if (input("Do you buy a new ticket? Y/N:") not in yeslist):
             menu()
     bet_coin = input("How many coins to bet")
     try:
@@ -151,18 +157,18 @@ def buy_ticket():
         try:
             int(num)
         except Exception:
-            print("please 1~6")
+            print("please 1~12")
             continue
         if int(num) in ranking_pre:
             print("already exists")
             continue
-        elif int(num) not in range(7):
-            print("please 1~6")
+        elif int(num) not in range(13):
+            print("please 1~12")
             continue
         elif int(num) == 0:
-            print("please 1~6")
+            print("please 1~12")
             continue
-        elif int(num) in range(7):
+        elif int(num) in range(13):
             i = i + 1
             ranking_pre.append(int(num))
     print("check please\n")
@@ -216,7 +222,7 @@ def main():
 
     #set horse
     horsenamelist_copy = horsenamelist
-    for i in range(6):
+    for i in range(12):
         horse_num = random.randint(0, len(horsenamelist_copy) - 1)
         horselist.append(horse(horsenamelist_copy[horse_num], i+1))
         horsenamelist_copy.pop(horse_num)
