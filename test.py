@@ -13,6 +13,7 @@ horsenamelist = ["ブレイブハート", "ウィナーズラン", "スピード
                  "マジックアワー", "ファーストスタ", "ラストチャンス", "ヒドゥンフォー", "トゥルービジョ", "ノブルプリンス"]
 horseticket = []
 horselist = []
+coin = 30000
 
 
 class horse:
@@ -64,68 +65,52 @@ def run_all():
 
     for i in range(6):
         horselist[i].pos = 0
+
     for i in range(100):
         for i in range(6):
             horselist[i].run_one()
     ranking_list = []
+
     for i in range(6):
         ranking_list.append((horselist[i].pos, horselist[i].num, horselist[i].name))
     ranking_list = sorted(ranking_list, reverse=True, key=lambda item : item[0])
     rankingnum_list = []
+
     for i in range(len(ranking_list)):
         print(f"{i+1}st:",f"{str(ranking_list[i][1])}:{ranking_list[i][2]}")
         rankingnum_list.append(int(ranking_list[i][1]))
+
     if rankingnum_list == horseticket:
         print("YOU ARE SUPERSTAR!!!!!!!!!\nreturn coin x150!")
-        coin = coin + int(bet_coin) * 149
+        coin = round(coin + int(bet_coin) * 149)
+        input("Press Enter Key")
         menu()
+
     returncoin = [50, 20, 8, 3, 1.5]
+    count = 0
     for i in range(5):
         if rankingnum_list[i] == horseticket[i]:
-            print(f"YOU ARE NICE!!!\nreturn coin x{returncoin[i]}")
-            coin = round(coin + int(bet_coin) * returncoin[i])
-            menu()
+            count = count+1
 
-    for i in range(5):
-        if i == 0:
-            if rankingnum_list[i] == horseticket[i+1]:
-                print(f"YOU ARE GOOD\nreturn coin x0.3")
-                coin = round(coin - int(bet_coin) * 0.7)
-                menu()
-                
-        elif i == 5:
-            if rankingnum_list[i] == horseticket[i-1]:
-                print(f"YOU ARE GOOD\nreturn coin x0.3")
-                coin = round(coin - int(bet_coin) * 0.7)
-                menu()
+    if count == 0:
+        if ranking_list[0] == horseticket[1] or ranking_list[1] == horseticket[0]:
+            print("YOU ARE GOOD!\nretrun coin x0.5")
+            coin = round(coin - int(bet_coin) * 0.5)
+
+        elif ranking_list[0] == horselist[2] or ranking_list[2] == horseticket[0]:
+            print("YOU ARE NICE TRY\nreturn coin x0.3")
+            coin = round(coin - int(bet_coin) * 0.7)
+        
         else:
-            if rankingnum_list[i] == horseticket[i+1] or ranking_list[i] == horseticket[i-1]:
-                print(f"YOU ARE GOOD\nreturn coin x0.3")
-                coin = round(coin - int(bet_coin) * 0.7)
-                menu()
-
-    for i in range(5):
-        if i == 0 or i == 1:
-            if rankingnum_list[i] == horseticket[i+2]:
-                print(f"YOU ARE GOOD\nreturn coin x0.1")
-                coin = round(coin - int(bet_coin) * 0.9)
-                menu()
-                
-        elif i == 5 or i == 4:
-            if rankingnum_list[i] == horseticket[i-2]:
-                print(f"YOU ARE GOOD\nreturn coin x0.1")
-                coin = round(coin - int(bet_coin) * 0.9)
-                menu()
-        else:
-            if rankingnum_list[i] == horseticket[i+2] or ranking_list[i] == horseticket[i-2]:
-                print(f"YOU ARE GOOD\nreturn coin x0.1")
-                coin = round(coin - int(bet_coin) * 0.9)
-                menu()
-
-
-    print("YOU ARE GOOD\nreturn coin x0.01")
-    coin = round(coin - int(bet_coin) * 0.99)
-
+            print("NOOO...NICE TRY\nreturn coin x0.01")
+            coin = round(coin - int(bet_coin) * 0.99)
+        input("Press Enter Key")
+        menu()
+            
+    
+    print(f"YOU ARE NICE!!!\nreturn coin x{returncoin[5-count]}")
+    coin = round(coin + int(bet_coin) * (returncoin[5-count]-1))
+    input("Press Enter Key")
     menu()
 
 
@@ -228,7 +213,6 @@ def main():
     global horselist
     horselist = []
     global coin
-    coin = 30000
 
     #set horse
     horsenamelist_copy = horsenamelist
