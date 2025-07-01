@@ -1,5 +1,6 @@
 import os
 import random
+import sys
 
 yeslist = ["y", "Y", "yes", "Yes","Yes"]
 choicehorselist = ["1", "2", "3", "4", "5", "6"]
@@ -106,15 +107,15 @@ def run_all():
         elif ranking_list[0] == horselist[2] or ranking_list[2] == horseticket[0]:
             print("YOU ARE NICE TRY\nreturn coin x0.3")
             coin = round(coin - int(bet_coin) * 0.7)
-        
+
         else:
             print("NOOO...NICE TRY\nreturn coin x0.01")
             coin = round(coin - int(bet_coin) * 0.99)
         input("Press Enter Key")
         menu()
-            
-    
-    print(f"YOU ARE NICE!!!\nreturn coin x{returncoin[5-count]}")
+
+
+    print(f"YOU ARE NICE!!!\nreturn coin x{int(returncoin[5-count])}")
     coin = round(coin + int(bet_coin) * (int(returncoin[5-count])-1))
     input("Press Enter Key")
     menu()
@@ -234,7 +235,7 @@ def main():
     else:
         print("Good bye!\nPress Enter Key...")
         input()
-    return
+    sys.exit()
 
 if __name__ == "__main__":
     main()
