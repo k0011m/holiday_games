@@ -40,12 +40,14 @@ class horse:
 
     def run_one(self):
         randseed = random.randint(0, 100)#100 change task
-        if self.stamina < randseed:
-            self.pos = self.pos + self.speed*1.3
-        elif self.stamina/2 < randseed:
-            self.pos = self.pos + self.speed
-        else:
+        if self.stamina/3 > randseed:
+            self.pos = self.pos + self.speed*1.8
+        if self.stamina > randseed:
+            self.pos = self.pos + self.speed*1.5
+        if 100-((100-self.stamina)/2) > randseed:
             self.pos = self.pos + self.speed*0.8
+        else:
+            self.pos = self.pos + self.speed*0.6
 
 class stadium:
 
@@ -137,7 +139,7 @@ def buy_ticket():
     if (horseticket != []):
         if (input("Do you buy a new ticket? Y/N:") not in yeslist):
             menu()
-    bet_coin = input("How many coins to bet")
+    bet_coin = input("How many coins to bet\n")
     try:
         int(bet_coin)
     except Exception:
