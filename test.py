@@ -30,6 +30,16 @@ class horse:
         else:
             self.stamina = random.randint(60, random.randint(70, 100))
 
+        if (self.speed+self.stamina)/2 > 60:
+            self.tech = random.randint(70, random.randint(70, 100)
+            if (self.speed+self.stamina)/2 > 70:
+                self.tech = ramdom.randintm(60, random.randint(45, range(self.speed+self.stamina)/2+15)))
+                if (self.speed+self.stamina)/2 > 80:
+                    self.tech = random.randint(50, random.randint(55, range((self.speed+self.stamina)/2)))
+                    if (self.speed+self.stamina)/2 > 90:
+                        self.tech = random.randint(40, random.randint(45, range((self.speed+self.stamina)/2-10)))
+        if (self.speed+self.stamina)/2 > 60
+
         self.tech = random.randint(60, 100)
 
         self.weather = random.randint(0, 2)
@@ -42,12 +52,16 @@ class horse:
         randseed = random.randint(0, 100)#100 change task
         if self.stamina/3 > randseed:
             self.pos = self.pos + self.speed*1.8
+            return
         if self.stamina > randseed:
             self.pos = self.pos + self.speed*1.5
+            return
         if 100-((100-self.stamina)/2) > randseed:
             self.pos = self.pos + self.speed*0.8
+            return
         else:
             self.pos = self.pos + self.speed*0.6
+            return
 
 class stadium:
 
