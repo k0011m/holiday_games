@@ -31,14 +31,16 @@ class horse:
             self.stamina = random.randint(60, random.randint(70, 100))
 
         if (self.speed+self.stamina)/2 > 60:
-            self.tech = random.randint(70, random.randint(70, 100)
+            self.tech = random.randint(70, random.randint(70, 100))
             if (self.speed+self.stamina)/2 > 70:
-                self.tech = ramdom.randintm(60, random.randint(45, range(self.speed+self.stamina)/2+15)))
+                self.tech = random.randint(60, random.randint(45, range(self.speed+self.stamina)/2+15))
                 if (self.speed+self.stamina)/2 > 80:
                     self.tech = random.randint(50, random.randint(55, range((self.speed+self.stamina)/2)))
                     if (self.speed+self.stamina)/2 > 90:
                         self.tech = random.randint(40, random.randint(45, range((self.speed+self.stamina)/2-10)))
-        if (self.speed+self.stamina)/2 > 60
+        else:
+        
+        if (self.speed+self.stamina)/2 > 60:
 
         self.tech = random.randint(60, 100)
 
